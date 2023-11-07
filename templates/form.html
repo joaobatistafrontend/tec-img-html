@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastro de Agendamento</title>
+</head>
+<body>
+    <h1>Cadastro de Agendamento</h1>
+    <section>
+     <p>Endereços</p>
+     {%for l in local %}
+       <tr>
+            <th scope="row"></th>
+            <td>{{ l.cidade }}</td>
+            <td>{{ l.endereco }}</td>
+            <td>{{ l.numeracao }}</td>
+            <td>{{ l.logradouro|default_if_none:"" }}</td>
+
+            <iframe class="map" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="{{l.mapa_link}}">
+            </iframe>
+        
+       </tr>
+       {%endfor%}
+</section>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
